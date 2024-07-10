@@ -28,6 +28,9 @@ Feature: Appointment creation by patient
     Then I click on element with xpath "//button[contains(text(),'12:30 PM')]"
     Then I click on element with xpath "//button[contains(text(),'Save')]"
     Then I wait for element with xpath "//a[contains(text(),'My appointments')]" to be present
-#    Then element with xpath "//div[@class='grid gap-4']" should have attribute "//p[contains(text(),'Auto appointment')]" as "//p[contains(text(),'Auto appointment')]"
-
+    And I wait for element with xpath "//p[contains(text(),'Auto appointment')]" to be present
+    And element with xpath "//p[contains(text(),'Auto appointment')]/ancestor::article" should contain text "Wednesday 31 July 2024, 12:30"
+    And element with xpath "//p[contains(text(),'Auto appointment')]/ancestor::article" should contain text "Max Wax"
+    Then I click on element with xpath "//p[contains(text(),'Auto appointment')]/ancestor::article/div[2]/span"
+    Then I click on element with xpath "//button[contains(text(),'Cancel appointment')]"
     Then I wait for 4 sec
