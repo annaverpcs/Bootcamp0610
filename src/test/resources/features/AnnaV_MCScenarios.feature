@@ -59,3 +59,4 @@ Feature: Medical Center Scenarios
     Then I wait for 1 sec
     #verify that the appointment is cancelled
     And element with xpath "//p[contains(text(),'Anna Unique appointment 12435')]" should not be present
+
