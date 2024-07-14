@@ -33,7 +33,7 @@ Feature:Test Medical center
     Then I click on element with xpath "//button[@type='submit']"
     Then I wait for 2 sec
     Then element with xpath "//h1[contains(text(),'Mary Poppins')]" should be present
-    Then I wait for 3 sec
+    Then I wait for 4 sec
 
 
 
