@@ -18,7 +18,7 @@ import static support.TestContext.getDriver;
 
 public class PredefinedStepDefs {
     @Given("I open url {string}")
-    public void iOpenUrl(String url) {
+    public void                                                                                                                                         iOpenUrl(String url) {
         getDriver().get(url);
     }
     @Then("I resize window to {int} and {int}")
