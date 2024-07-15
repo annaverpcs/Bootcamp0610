@@ -39,6 +39,10 @@ Feature: user stories # 3 and # 7
     Then I wait for 4 sec
     Then I click on element with xpath "//*[@role='dialog']//button//*[contains(text(),'close')]"
     Then I click on element with xpath "//td[contains(text(),'Sirano de Berzerak')]/following::td[2]//*[contains(text(),'delete')]"
+    Then I wait for 2 sec
+    Then I click on element with xpath "//button[contains(text(),'Remove specialist')]"
+    Then I wait for 2 sec
+    Then element with xpath "//table[contains(@class,'full')]//td[contains(text(),'Sirano de Berzerak')]//parent::tr" should not be present
 
 # data-driven Test set (JUN-236) for user story # 3  - As an administrator, I can add new specialist
   @functionality @Medicenter @user-story-3 @data-driven
