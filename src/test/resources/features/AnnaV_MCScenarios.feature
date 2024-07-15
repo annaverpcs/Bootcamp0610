@@ -2,7 +2,7 @@
 #Author : Anna Verkhovskaya
 # Manual test cases are in Test Set Jira ticket JUN-0
 # Manual test is in JUN-0
-
+@medicenter
 Feature: Medical Center Scenarios
 
   #Precondition for all scenarios in this feature
