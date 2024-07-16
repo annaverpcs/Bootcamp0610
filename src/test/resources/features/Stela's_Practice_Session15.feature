@@ -14,7 +14,7 @@
 #  Then element with xpath "//input[@value='baby']" should be present
 
 
-
+@medicenter
 
 Feature:Test Medical center
   Scenario:Test Login as admin in https://medicenter-qa2.vercel.app/

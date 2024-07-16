@@ -1,6 +1,6 @@
 #Author : Dzmitry Kazlou
 # Manual test cases are in Test Set Jira ticket JUN-136
-
+@medicenter
 Feature: Medical Center Scenarios for User Story#6
   #Preconditions for all scenarios in this feature
   Background:

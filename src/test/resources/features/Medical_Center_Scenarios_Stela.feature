@@ -1,3 +1,4 @@
+@medicenter
 Feature: : Specialist
 
 Scenario: Add New Specialist

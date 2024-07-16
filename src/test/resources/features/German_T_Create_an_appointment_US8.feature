@@ -1,4 +1,4 @@
-@predefined
+@predefined @medicenter
 Feature: Smoke steps
 
   @predefined1

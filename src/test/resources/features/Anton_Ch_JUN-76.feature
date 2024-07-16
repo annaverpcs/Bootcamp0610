@@ -1,5 +1,6 @@
 # MediCenter V2 test scenarios for user stories 3 and 7
 # Author : Anton Chukin
+@medicenter
 Feature: user stories # 3 and # 7
 
   Background:

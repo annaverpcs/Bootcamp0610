@@ -1,3 +1,4 @@
+@medicenter
 Feature: Medical Center Scenarios. Patient is able to cancel their appointment.
 
   Background:

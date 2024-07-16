@@ -1,7 +1,7 @@
 #Session 16:
 #Author: Mariia Tupchii
 #Manual test is in JUN-87, JUN-101
-
+@medicenter
 Feature: Medical Center Scenarios
 
     #Precondition for all scenarios in this feature

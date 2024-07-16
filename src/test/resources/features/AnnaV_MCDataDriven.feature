@@ -1,7 +1,7 @@
 #Session 19
 
 Feature: Medical Center Scenarios Data Driven
-
+  @medicenter
   Scenario Outline: Make an appointment as Patient and Delete an appointment Data Driven
     Given I open url "https://medicenter-qa2.vercel.app/"
     Then I click on element with xpath "//button[contains(text(),'Login')]"
@@ -31,4 +31,3 @@ Feature: Medical Center Scenarios Data Driven
     Examples:
       | email                 |  password    | xpath2                                 | xpath3                                   | xpath4                                             | xpath5                                           | text2                           | xpath6                   | sec | xpath7                                         | text3        | xpath8                | xpath9                                  | xpath10                             | xpath11                                                 | xpath12                                                                             | text4                         | xpath13                                                                               | xpath14                                                                 | text5                                          | xpath15                                           |
       | "patient1@gmail.com" |  "abc123" | "//button[contains(text(),'Sign in')]" | "//h1[contains(text(),'James Johnson')]" | "//button[contains(text(),'Make an appointment')]" | "//span[contains(text(),'Make an appointment')]" | "Anna Unique appointment 12435" | "//textarea[@id='note']" | 1   | "//select[@name='employee_id']/..//option[12]" | "07/17/2024" | "//input[@id='date']" | "//button[contains(text(),'10:15 AM')]" | "//button[contains(text(),'Save')]" | "//p[contains(text(),'Anna Unique appointment 12435')]" | "//p[contains(text(),'Anna Unique appointment 12435')]/ancestor::article/div[1]/h3" | "Tuesday 16 July 2024, 10:15" | "//p[contains(text(),'Anna Unique appointment 12435')]/ancestor::article/div[2]/span" | "//h2[contains(text(),'Are you sure you want to cancel appointment?')]" | 'Are you sure you want to cancel appointment?' | "//button[contains(text(),'Cancel appointment')]" |
-
