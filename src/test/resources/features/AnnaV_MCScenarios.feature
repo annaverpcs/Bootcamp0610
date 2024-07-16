@@ -2,7 +2,7 @@
 #Author : Anna Verkhovskaya
 # Manual test cases are in Test Set Jira ticket JUN-0
 # Manual test is in JUN-0
-
+@medicenter @regression
 Feature: Medical Center Scenarios
 
   #Precondition for all scenarios in this feature
@@ -10,7 +10,7 @@ Feature: Medical Center Scenarios
     Given I open url "https://medicenter-qa2.vercel.app/"
     Then I click on element with xpath "//button[contains(text(),'Login')]"
     Then I wait for element with xpath "//label[contains(text(),'Email address')]" to be present
-
+ @regression
   Scenario: Login as Administrator
    # Given I open url "https://medicenter-qa2.vercel.app/"
    # Then I click on element with xpath "//button[contains(text(),'Login')]"
@@ -18,7 +18,7 @@ Feature: Medical Center Scenarios
     Then I type "administrator1@gmail.com" into element with xpath "//input[@id='email']"
     Then I type "abc123" into element with xpath "//input[@id='password']"
     And I click on element with xpath "//button[contains(text(),'Sign in')]"
-
+@smoke
   Scenario: Login as Patient
    # Given I open url "https://medicenter-qa2.vercel.app/"
    # Then I click on element with xpath "//button[contains(text(),'Login')]"
@@ -26,7 +26,7 @@ Feature: Medical Center Scenarios
     Then I type "patient1@gmail.com" into element with xpath "//input[@id='email']"
     Then I type "abc123" into element with xpath "//input[@id='password']"
     And I click on element with xpath "//button[contains(text(),'Sign in')]"
-
+  @medicenter
   Scenario: Make an appointment as Patient and Delete an appointment
     Then I type "patient1@gmail.com" into element with xpath "//input[@id='email']"
     Then I type "abc123" into element with xpath "//input[@id='password']"
@@ -60,3 +60,16 @@ Feature: Medical Center Scenarios
     #verify that the appointment is cancelled
     And element with xpath "//p[contains(text(),'Anna Unique appointment 12435')]" should not be present
 
+  Scenario Outline: Login as Data driven test
+    Then I type <text> into element with xpath "//input[@id='email']"
+    Then I type <text1> into element with xpath "//input[@id='password']"
+    And I click on element with xpath "//button[contains(text(),'Sign in')]"
+    Examples:
+      | text                       |  text1    |
+      | "administrator1@gmail.com" | "abc123" |
+      | "patient1@gmail.com" | "abc123" |
+      | "patient2@gmail.com" | "abc123" |
+      | "abcd" | "abc123" |
+      | "" | "abc123" |
+      | "administrator1@gmail.com" | "12345INcorrect" |
+      | "patient1@gmail.compatient1@gmail.compatient1@gmail.compatient1@gmail.compatient1@gmail.compatient1@gmail.compatient1@gmail.compatient1@gmail.com" | "" |
