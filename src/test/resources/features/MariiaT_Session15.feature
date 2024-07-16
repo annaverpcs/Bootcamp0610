@@ -1,3 +1,4 @@
+@predefined
 Feature: Test Search Engines
 
   Scenario: Test duckduckgo.com functionality

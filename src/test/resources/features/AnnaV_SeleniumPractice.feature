@@ -1,5 +1,5 @@
 Feature: Medical Center login using Selenium WebDriver methods
-
+  @medicenter
   Scenario: Login to Medicenter with Selenium WebDriver methods
     Given AnnaV launch "MedicenterV2"
     Then AnnaV page title is "Medicenter"

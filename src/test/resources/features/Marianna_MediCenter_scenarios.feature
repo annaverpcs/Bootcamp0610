@@ -1,3 +1,4 @@
+@medicenter
 Feature: Test Medical Center Scenarios
 
   Scenario: Test login functionality

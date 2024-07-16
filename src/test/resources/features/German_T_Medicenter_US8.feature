@@ -2,6 +2,7 @@
 #Author: German Tereshchenko
 #Manual test cases are in the Test Set Jira ticket
 #Manual test set is in JUN-111
+@medicenter
 Feature: Medicenter US#8
 
   Scenario: As a patient I want to create an appointment

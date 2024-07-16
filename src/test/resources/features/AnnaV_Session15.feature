@@ -1,5 +1,5 @@
 Feature: Test Search Engines
-  
+  @medicenter
   Scenario: Test duckduckgo.com functionality
     Given I open url "https://duckduckgo.com/"
     Then I type "tomato" into element with xpath "//input[@id='searchbox_input']"

@@ -1,3 +1,4 @@
+@medicenter
 Feature: Appointment creation by patient
 
   Background:

@@ -1,6 +1,6 @@
 #Autor: Diana Akisheva
 #Manual test cases are in Test Set Jira ticket JUN-108
-
+@medicenter
   Feature: Medical Center Scenarios
 
  #Precondition for all scenarios in this feature
