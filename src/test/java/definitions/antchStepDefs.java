@@ -1,6 +1,7 @@
 package definitions;
 
 
+import io.cucumber.java.After;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import org.openqa.selenium.By;
@@ -12,13 +13,6 @@ public class antchStepDefs {
     @Given ("antch launch MedicenterV2")
     public void antchLaunch() {getDriver().get(xPathLibrary.sMedicenterURLV2);
     }
-
-//    @Then("antch assert page contains {string}")
-//    public void antchPageContains(String sPageContains) {
-//        switch (sPageContains){
-//            case
-//        }
-//    }
 
     @Then("antch click on {string} button")
     public void antchClickSmth(String sSmthName) {

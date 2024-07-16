@@ -2,9 +2,7 @@
 # Author : Anton Chukin
 Feature: user stories # 3 and # 7
 
-#  user story # 3 (Test set JUN-236) - As an administrator, I can add new specialist
-  @functionality @Medicenter @user-story-3
-  Scenario: Happy flow of adding new specialist
+  Background:
     Given antch launch MedicenterV2
     Then I wait for element with xpath "//header//button[contains(text(),'Login')]" to be present
     Then antch click on "Login" button
@@ -16,102 +14,129 @@ Feature: user stories # 3 and # 7
       # land on home page
     Then I wait for element with xpath "//button[starts-with(text(),'Specialist')]" to be present
     Then element with xpath "//header/div/*[not(contains(text(),'Medical Center')) and not(contains(text(),'Log'))]" should be present
+
+#  user story # 3 (Test set JUN-236) - As an administrator, I can add new specialist
+#  @functionality @medicenter @user-story-3 @positive
+#  Scenario: Happy flow of adding new specialist
+#    Then I click on element with xpath "//button[starts-with(text(),'Specialist')]"
+#    Then antch click on "Add specialist" button
+#    Then I wait for element with xpath "//*[@role='dialog']" to be present
+#    Then element with xpath "//*[@role='dialog']//*[contains(text(),'New specialist')]" should be present
+#    Then I type "Sirano" into element with xpath "//*[@role='dialog']//input[@name='first_name']"
+#    Then I type "de Berzerak" into element with xpath "//*[@role='dialog']//input[@name='last_name']"
+#    Then I click on element with xpath "//*[@role='dialog']//option[@value='doctor']"
+#    Then I click on element with xpath "//*[@role='dialog']//label[contains(text(),'Mon')]/parent::button"
+#    Then I click on element with xpath "//*[@id='working_hours.monday.from']"
+#    Then I type "0900" into element with xpath "//*[@id='working_hours.monday.from']"
+#    Then I click on element with xpath "//*[@id='working_hours.monday.to']"
+#    Then I type "1100" into element with xpath "//*[@id='working_hours.monday.to']"
+#    Then I click on element with xpath "//*[@role='dialog']//*[@type='submit']"
+#    Then I wait for 4 sec
+#    Then I open url "https://medicenter-qa2.vercel.app/admin"
+#    Then I wait for element with xpath "//table[contains(@class,'full')]//td[contains(text(),'Sirano de Berzerak')]//parent::tr" to be present
+#    Then element with xpath "//td[contains(text(),'Sirano de Berzerak')]/following::td[1]" should contain text "octor"
+#    Then I click on element using JavaScript with xpath "//td[contains(text(),'Sirano de Berzerak')]/following::td[2]//*[contains(text(),'edit')]"
+#    Then I wait for element with xpath "//*[@id='working_hours.monday.from']" to be present
+#   # Then element with xpath "//*[@id='working_hours.monday.from']" should contain text "00:00"
+#    Then I wait for 4 sec
+#    Then I click on element with xpath "//*[@role='dialog']//button//*[contains(text(),'close')]"
+#    Then I click on element with xpath "//td[contains(text(),'Sirano de Berzerak')]/following::td[2]//*[contains(text(),'delete')]"
+#    Then I wait for 2 sec
+#    Then I click on element with xpath "//button[contains(text(),'Remove specialist')]"
+#    Then I wait for 2 sec
+#    Then element with xpath "//table[contains(@class,'full')]//td[contains(text(),'Sirano de Berzerak')]//parent::tr" should not be present
+
+# data-driven Test set (JUN-236) for user story # 3  - As an administrator, I can add new specialist
+  @functionality @medicenter @user-story-3 @data-driven @positive
+  Scenario Outline: adding new specialist
     Then I click on element with xpath "//button[starts-with(text(),'Specialist')]"
     Then antch click on "Add specialist" button
     Then I wait for element with xpath "//*[@role='dialog']" to be present
     Then element with xpath "//*[@role='dialog']//*[contains(text(),'New specialist')]" should be present
-    Then I type "Sirano" into element with xpath "//*[@role='dialog']//input[@name='first_name']"
-    Then I type "de Berzerak" into element with xpath "//*[@role='dialog']//input[@name='last_name']"
-    Then I click on element with xpath "//*[@role='dialog']//option[@value='doctor']"
+    Then I type <FN1> into element with xpath "//*[@role='dialog']//input[@name='first_name']"
+    Then I type <LN1> into element with xpath "//*[@role='dialog']//input[@name='last_name']"
+    Then I click on element with xpath <role_xpath1>
     Then I click on element with xpath "//*[@role='dialog']//label[contains(text(),'Mon')]/parent::button"
     Then I click on element with xpath "//*[@id='working_hours.monday.from']"
-    Then I type "0900" into element with xpath "//*[@id='working_hours.monday.from']"
+    Then I type <start from1> into element with xpath "//*[@id='working_hours.monday.from']"
     Then I click on element with xpath "//*[@id='working_hours.monday.to']"
-    Then I type "1100" into element with xpath "//*[@id='working_hours.monday.to']"
+    Then I type <finish at1> into element with xpath "//*[@id='working_hours.monday.to']"
     Then I click on element with xpath "//*[@role='dialog']//*[@type='submit']"
     Then I wait for 4 sec
     Then I open url "https://medicenter-qa2.vercel.app/admin"
-    Then I wait for element with xpath "//table[contains(@class,'full')]//td[contains(text(),'Sirano de Berzerak')]//parent::tr" to be present
-    Then element with xpath "//td[contains(text(),'Sirano de Berzerak')]/following::td[1]" should contain text "octor"
-    Then I click on element using JavaScript with xpath "//td[contains(text(),'Sirano de Berzerak')]/following::td[2]//*[contains(text(),'edit')]"
+    Then I wait for element with xpath "//table[contains(@class,'full')]//td[contains(text(),'Sirano') or contains(text(),'de Berzerak')]//parent::tr" to be present
+    Then element with xpath "//td[contains(text(),'Sirano de Berzerak')]/following::td[1]" should contain text <role1>
+    Then I click on element using JavaScript with xpath "//td[contains(text(),'Sirano') or contains(text(),'de Berzerak')]/following::td[2]//*[contains(text(),'edit')]"
     Then I wait for element with xpath "//*[@id='working_hours.monday.from']" to be present
-   # Then element with xpath "//*[@id='working_hours.monday.from']" should contain text "00:00"
-    Then I wait for 4 sec
+   # Then element with xpath "//*[@id='working_hours.monday.from']" should contain text "09:00"
+    Then I wait for 2 sec
     Then I click on element with xpath "//*[@role='dialog']//button//*[contains(text(),'close')]"
-    Then I click on element with xpath "//td[contains(text(),'Sirano de Berzerak')]/following::td[2]//*[contains(text(),'delete')]"
+    Then I click on element with xpath "//td[contains(text(),'Sirano') or contains(text(),'de Berzerak')]/following::td[2]//*[contains(text(),'delete')]"
     Then I wait for 2 sec
     Then I click on element with xpath "//button[contains(text(),'Remove specialist')]"
     Then I wait for 2 sec
-    Then element with xpath "//table[contains(@class,'full')]//td[contains(text(),'Sirano de Berzerak')]//parent::tr" should not be present
-
-# data-driven Test set (JUN-236) for user story # 3  - As an administrator, I can add new specialist
-  @functionality @Medicenter @user-story-3 @data-driven
-  Scenario Outline: adding new specialist with various inputs
-    Given antch launch MedicenterV2
-    Then I wait for element with xpath <xpath> to be present
-    Then antch click on <sSmthName> button
-    Then I wait for element with xpath <xpath1> to be present
-    Then I type <text> into element with xpath <xpath2>
-    Then I type <text1> into element with xpath <xpath3>
-    Then antch click on <sSmthName1> button
-    Then I wait for element with xpath <xpath4> to be present
-    Then element with xpath <xpath5> should be present
-    Then I click on element with xpath <xpath4>
-    Then antch click on <sSmthName2> button
-    Then I wait for element with xpath <xpath6> to be present
-    Then element with xpath <xpath7> should be present
-    Then I type <text2> into element with xpath <xpath8>
-    Then I type <text3> into element with xpath <xpath9>
-    Then I click on element with xpath <xpath10>
-    Then I click on element with xpath <xpath11>
-    Then I click on element with xpath <xpath12>
-    Then I type <text4> into element with xpath <xpath12>
-    Then I click on element with xpath <xpath13>
-    Then I type <text5> into element with xpath <xpath13>
-    Then I click on element with xpath <xpath14>
-    Then I wait for 4 sec
-    Then I open url <url>
-    Then I wait for element with xpath <xpath15> to be present
-    Then element with xpath <xpath16> should contain text <text6>
-    Then I click on element using JavaScript with xpath <xpath17>
-    Then I wait for element with xpath <xpath12> to be present
-    Then I wait for <sec> sec
-    Then I click on element with xpath <xpath18>
-    Then I click on element with xpath <xpath19>
+    Then element with xpath "//table[contains(@class,'full')]//td[contains(text(),'Sirano') or contains(text(),'de Berzerak')]//parent::tr" should not be present
     Examples:
-      | xpath                                        | sSmthName | xpath1                | text                       | xpath2                 | text1    | xpath3                    | sSmthName1 | xpath4                                       | xpath5                                                                                   | sSmthName2       | xpath6                | xpath7                                                      | text2    | xpath8                                           | text3         | xpath9                                          | xpath10                                        | xpath11                                                             | xpath12                                | text4  | xpath13                              | text5  | xpath14                                  | sec | url                                       | xpath15                                                                                   | xpath16                                                        | text6   | xpath17                                                                                    | xpath18                                                    | xpath19                                                                                      |
-      | "//header//button[contains(text(),'Login')]" | "Login"   | "//*[@type='submit']" | "administrator2@gmail.com" | "//input[@id='email']" | "abc123" | "//input[@id='password']" | "Sign In"  | "//button[starts-with(text(),'Specialist')]" | "//header/div/*[not(contains(text(),'Medical Center')) and not(contains(text(),'Log'))]" | "Add specialist" | "//*[@role='dialog']" | "//*[@role='dialog']//*[contains(text(),'New specialist')]" | "Sirano" | "//*[@role='dialog']//input[@name='first_name']" | "de Berzerak" | "//*[@role='dialog']//input[@name='last_name']" | "//*[@role='dialog']//option[@value='doctor']" | "//*[@role='dialog']//label[contains(text(),'Mon')]/parent::button" | "//*[@id='working_hours.monday.from']" | "0000" | "//*[@id='working_hours.monday.to']" | "2359" | "//*[@role='dialog']//*[@type='submit']" | 4   | "https://medicenter-qa2.vercel.app/admin" | "//table[contains(@class,'full')]//td[contains(text(),'Sirano de Berzerak')]//parent::tr" | "//td[contains(text(),'Sirano de Berzerak')]/following::td[1]" | "octor" | "//td[contains(text(),'Sirano de Berzerak')]/following::td[2]//*[contains(text(),'edit')]" | "//*[@role='dialog']//button//*[contains(text(),'close')]" | "//td[contains(text(),'Sirano de Berzerak')]/following::td[2]//*[contains(text(),'delete')]" |
-      | "//header//button[contains(text(),'Login')]" | "Login"   | "//*[@type='submit']" | "administrator2@gmail.com" | "//input[@id='email']" | "abc123" | "//input[@id='password']" | "Sign In"  | "//button[starts-with(text(),'Specialist')]" | "//header/div/*[not(contains(text(),'Medical Center')) and not(contains(text(),'Log'))]" | "Add specialist" | "//*[@role='dialog']" | "//*[@role='dialog']//*[contains(text(),'New specialist')]" | "Sirano" | "//*[@role='dialog']//input[@name='first_name']" | "de Berzerak" | "//*[@role='dialog']//input[@name='last_name']" | "//*[@role='dialog']//option[@value='doctor']" | "//*[@role='dialog']//label[contains(text(),'Mon')]/parent::button" | "//*[@id='working_hours.monday.from']" | "0900" | "//*[@id='working_hours.monday.to']" | "0959" | "//*[@role='dialog']//*[@type='submit']" | 4   | "https://medicenter-qa2.vercel.app/admin" | "//table[contains(@class,'full')]//td[contains(text(),'Sirano de Berzerak')]//parent::tr" | "//td[contains(text(),'Sirano de Berzerak')]/following::td[1]" | "octor" | "//td[contains(text(),'Sirano de Berzerak')]/following::td[2]//*[contains(text(),'edit')]" | "//*[@role='dialog']//button//*[contains(text(),'close')]" | "//td[contains(text(),'Sirano de Berzerak')]/following::td[2]//*[contains(text(),'delete')]" |
-      | "//header//button[contains(text(),'Login')]" | "Login"   | "//*[@type='submit']" | "administrator2@gmail.com" | "//input[@id='email']" | "abc123" | "//input[@id='password']" | "Sign In"  | "//button[starts-with(text(),'Specialist')]" | "//header/div/*[not(contains(text(),'Medical Center')) and not(contains(text(),'Log'))]" | "Add specialist" | "//*[@role='dialog']" | "//*[@role='dialog']//*[contains(text(),'New specialist')]" | "Sirano" | "//*[@role='dialog']//input[@name='first_name']" | "de Berzerak" | "//*[@role='dialog']//input[@name='last_name']" | "//*[@role='dialog']//option[@value='doctor']" | "//*[@role='dialog']//label[contains(text(),'Mon')]/parent::button" | "//*[@id='working_hours.monday.from']" | "    " | "//*[@id='working_hours.monday.to']" | "1100" | "//*[@role='dialog']//*[@type='submit']" | 4   | "https://medicenter-qa2.vercel.app/admin" | "//table[contains(@class,'full')]//td[contains(text(),'Sirano de Berzerak')]//parent::tr" | "//td[contains(text(),'Sirano de Berzerak')]/following::td[1]" | "octor" | "//td[contains(text(),'Sirano de Berzerak')]/following::td[2]//*[contains(text(),'edit')]" | "//*[@role='dialog']//button//*[contains(text(),'close')]" | "//td[contains(text(),'Sirano de Berzerak')]/following::td[2]//*[contains(text(),'delete')]" |
-      | "//header//button[contains(text(),'Login')]" | "Login"   | "//*[@type='submit']" | "administrator2@gmail.com" | "//input[@id='email']" | "abc123" | "//input[@id='password']" | "Sign In"  | "//button[starts-with(text(),'Specialist')]" | "//header/div/*[not(contains(text(),'Medical Center')) and not(contains(text(),'Log'))]" | "Add specialist" | "//*[@role='dialog']" | "//*[@role='dialog']//*[contains(text(),'New specialist')]" | "Sirano" | "//*[@role='dialog']//input[@name='first_name']" | "de Berzerak" | "//*[@role='dialog']//input[@name='last_name']" | "//*[@role='dialog']//option[@value='doctor']" | "//*[@role='dialog']//label[contains(text(),'Mon')]/parent::button" | "//*[@id='working_hours.monday.from']" | "0900" | "//*[@id='working_hours.monday.to']" | "    " | "//*[@role='dialog']//*[@type='submit']" | 4   | "https://medicenter-qa2.vercel.app/admin" | "//table[contains(@class,'full')]//td[contains(text(),'Sirano de Berzerak')]//parent::tr" | "//td[contains(text(),'Sirano de Berzerak')]/following::td[1]" | "octor" | "//td[contains(text(),'Sirano de Berzerak')]/following::td[2]//*[contains(text(),'edit')]" | "//*[@role='dialog']//button//*[contains(text(),'close')]" | "//td[contains(text(),'Sirano de Berzerak')]/following::td[2]//*[contains(text(),'delete')]" |
-
-#  JUN-409 Adding new specialist with an empty Last name field
-#  JUN-408 Adding new specialist with an empty first name field
-#  JUN-321 Add new specialist with pasting 99 chars in "Last Name" field
-#  JUN-319 #Add new specialist with pasting 99 chars in "First Name" field
+    |    FN1     |     LN1    |         role_xpath1      |     role1     |   start from1    |  finish at1  |
+#  JUN-347 Happy flow of adding new specialist
+    | "Sirano" |"de Berzerak"|"//*[@role='dialog']//option[@value='doctor']"|"octor"|"0900"|"1100"|
 #  JUN-244 New specialist's working hours can span the whole 24 hours day
-#  JUN-243 Specialist's working hours cannot finish past 23:59
-#  JUN-242 Specialist's working starting hours can not be after end hours
-#  JUN-241 Specialist's working hours cannot be less than 1 hour
+    | "Sirano" |"de Berzerak"|"//*[@role='dialog']//option[@value='doctor']"|"octor"|"0000"|"2359"|
 #  JUN-142 Specialist's working hours are at least 1 hour
+    | "Sirano" |"de Berzerak"|"//*[@role='dialog']//option[@value='doctor']"|"octor"|"0900"|"1000"|
+
+  @functionality @medicenter @user-story-3 @data-driven @negative
+  Scenario Outline: adding new specialist
+    Then I click on element with xpath "//button[starts-with(text(),'Specialist')]"
+    Then antch click on "Add specialist" button
+    Then I wait for element with xpath "//*[@role='dialog']" to be present
+    Then element with xpath "//*[@role='dialog']//*[contains(text(),'New specialist')]" should be present
+    Then I type <FN> into element with xpath "//*[@role='dialog']//input[@name='first_name']"
+    Then I type <LN> into element with xpath "//*[@role='dialog']//input[@name='last_name']"
+    Then I click on element with xpath <role_xpath>
+    Then I click on element with xpath "//*[@role='dialog']//label[contains(text(),'Mon')]/parent::button"
+    Then I click on element with xpath "//*[@id='working_hours.monday.from']"
+    Then I type <start from> into element with xpath "//*[@id='working_hours.monday.from']"
+    Then I click on element with xpath "//*[@id='working_hours.monday.to']"
+    Then I type <finish at> into element with xpath "//*[@id='working_hours.monday.to']"
+    Then I click on element with xpath "//*[@role='dialog']//*[@type='submit']"
+    Then I wait for 3 sec
+    Then element with xpath "//*[@role='dialog']//*[@type='submit']" should be present
+    Then element with xpath "//table[contains(@class,'full')]//td[contains(text(),'Sirano') or contains(text(),'de Berzerak')]//parent::tr" should not be present
+#    Then I open url "https://medicenter-qa2.vercel.app/admin"
+#    Then I wait for element with xpath "//table[contains(@class,'full')]//td[contains(text(),'Sirano') or contains(text(),'de Berzerak')]//parent::tr" to be present
+#    Then element with xpath "//td[contains(text(),'Sirano de Berzerak')]/following::td[1]" should contain text <role>
+#    Then I click on element using JavaScript with xpath "//td[contains(text(),'Sirano') or contains(text(),'de Berzerak')]/following::td[2]//*[contains(text(),'edit')]"
+#    Then I wait for element with xpath "//*[@id='working_hours.monday.from']" to be present
+#    Then element with xpath "//*[@id='working_hours.monday.from']" should contain text "09:00"
+#    Then I wait for 2 sec
+#    Then I click on element with xpath "//*[@role='dialog']//button//*[contains(text(),'close')]"
+#    Then I click on element with xpath "//td[contains(text(),'Sirano') or contains(text(),'de Berzerak')]/following::td[2]//*[contains(text(),'delete')]"
+#    Then I wait for 2 sec
+#    Then I click on element with xpath "//button[contains(text(),'Remove specialist')]"
+#    Then I wait for 2 sec
+#    Then element with xpath "//table[contains(@class,'full')]//td[contains(text(),'Sirano') or contains(text(),'de Berzerak')]//parent::tr" should not be present
+    Examples:
+      |    FN     |     LN    |         role_xpath      |     role     |   start from    |  finish at  |
+#  JUN-409 Adding new specialist with an empty Last name field
+      | "Sirano" |""|"//*[@role='dialog']//option[@value='doctor']"|"octor"|"0900"|"1100"|
+#  JUN-408 Adding new specialist with an empty first name field
+      | "" |"de Berzerak"|"//*[@role='dialog']//option[@value='doctor']"|"octor"|"0900"|"1100"|
+#  JUN-321 Add new specialist with pasting 99 chars in "Last Name" field
+      | "Sirano" |"012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678"|"//*[@role='dialog']//option[@value='doctor']"|"octor"|"0900"|"1100"|
+#  JUN-319 #Add new specialist with pasting 99 chars in "First Name" field
+      | "012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678" |"de Berzerak"|"//*[@role='dialog']//option[@value='doctor']"|"octor"|"0900"|"1100"|
+#  JUN-243 Specialist's working hours cannot finish past 23:59
+      | "Sirano" |"de Berzerak"|"//*[@role='dialog']//option[@value='doctor']"|"octor"|"0900"|"2400"|
+#  JUN-242 Specialist's working starting hours can not be after end hours
+      | "Sirano" |"de Berzerak"|"//*[@role='dialog']//option[@value='doctor']"|"octor"|"0900"|"0800"|
+#  JUN-241 Specialist's working hours cannot be less than 1 hour
+      | "Sirano" |"de Berzerak"|"//*[@role='dialog']//option[@value='doctor']"|"octor"|"0900"|"0959"|
 
 #  user story # 7 (Test set JUN-309) - As an administrator, I can cancel an appointment
 #  JUN-311 Cancelling an appointment as an administrator
-  @functionality @Medicenter @user-story-7
+  @functionality @Medicenter @user-story-7 @positive
   Scenario: make an appointment as admin and then cancel the appointment
-    Given antch launch MedicenterV2
-    Then I wait for element with xpath "//header//button[contains(text(),'Login')]" to be present
-    Then antch click on "Login" button
-    # Then I click on element with xpath "//header//button[contains(text(),'Login')]"
-    Then I wait for element with xpath "//*[@type='submit']" to be present
-    Then I type "administrator2@gmail.com" into element with xpath "//input[@id='email']"
-    Then I type "abc123" into element with xpath "//input[@id='password']"
-    Then I wait for 2 sec
-    Then antch click on "Sign In" button
-    Then I wait for 4 sec
-    # landed on home page
-    Then I wait for element with xpath "//button[starts-with(text(),'Specialist')]" to be present
-    Then element with xpath "//header/div/*[not(contains(text(),'Medical Center')) and not(contains(text(),'Log'))]" should be present
     Then I click on element with xpath "//button[.='Appointments']"
     Then antch click on "Add appointment" button
     Then I wait for element with xpath "//*[@role='dialog']" to be present
@@ -139,4 +164,4 @@ Feature: user stories # 3 and # 7
     Then I click on element with xpath "//button[@title='day view']"
     Then I wait for 3 sec
     Then element with xpath "//*[starts-with(@aria-label,'July 15,')]/..//following-sibling::div//*[text()='Ylvis Thornvalds']//..//parent::div" should not be present
-#   # appointment is cancelled
+    # appointment is cancelled
