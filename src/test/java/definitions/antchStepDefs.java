@@ -30,19 +30,19 @@ public class antchStepDefs {
                 getDriver().findElement(By.xpath(xPathLibrary.sSignInButton)).click();
                 break;
             case "Add specialist":
-                getDriver().findElement(By.xpath(xPathLibrary.sAddSpecialist)).click();
+                getDriver().findElement(By.xpath(antchXPathLib.sAddSpecialist)).click();
                 break;
             case "Add appointment":
-                getDriver().findElement(By.xpath(xPathLibrary.sAddAppointment)).click();
+                getDriver().findElement(By.xpath(antchXPathLib.sAddAppointment)).click();
                 break;
             case "Save specialist":
-                getDriver().findElement(By.xpath(xPathLibrary.sSaveSpecialist)).click();
+                getDriver().findElement(By.xpath(antchXPathLib.sSaveSpecialist)).click();
                 break;
             case "Save appointment":
-                getDriver().findElement(By.xpath(xPathLibrary.sSaveAppointment)).click();
+                getDriver().findElement(By.xpath(antchXPathLib.sSaveAppointment)).click();
                 break;
             case "Appointment tab":
-                getDriver().findElement(By.xpath(xPathLibrary.sAppointmentTab)).click();
+                getDriver().findElement(By.xpath(antchXPathLib.sAppointmentTab)).click();
                 break;
             default:
                 System.out.println("There is no such element on the webpage");
