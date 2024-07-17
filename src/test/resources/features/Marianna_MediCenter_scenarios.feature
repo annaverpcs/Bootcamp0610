@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Marianna Vozniuk
 # Manual Test Cases for User Stories 5, 9
 

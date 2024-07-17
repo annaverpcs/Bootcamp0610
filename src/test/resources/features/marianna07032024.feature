@@ -1,3 +1,4 @@
+@medicenter
 Feature: Test search engines
 
   Scenario: Test https://duckduckgo.com/ functionality
