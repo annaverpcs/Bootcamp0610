@@ -9,3 +9,5 @@ Feature: Test Search Engines
 
     Then element with xpath "//div[@id='react-layout']" should contain text 'tomato'
     Then I wait for 5 sec
+
+
